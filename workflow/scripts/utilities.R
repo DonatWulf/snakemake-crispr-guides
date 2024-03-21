@@ -15,7 +15,7 @@ addOffTargetSequences <- function(
       mc.cores = max_cores,
       X = guideset_chunks,
       FUN = function(guide_chunk) {
-        addSpacerAlignments(
+        addSpacerAlignmentsIterative(
           guide_chunk,
           aligner = "biostrings",
           txObject = txdb,
@@ -30,7 +30,7 @@ addOffTargetSequences <- function(
     # merge all chunks to single guideSet again
     guideset <- Reduce("c", guideset_chunks)
   } else if (guide_aligner == "bowtie") {
-    guideset <- addSpacerAlignments(
+    guideset <- addSpacerAlignmentsIterative(
       guideset,
       aligner = "bowtie",
       aligner_index = paste0(genome_index, "/index"),
